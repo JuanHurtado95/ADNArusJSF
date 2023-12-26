@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<!-- 
+		Replace path to template, title, header and body
+		with actual data.
+	 -->
+<ui:composition template="/templates/common.xhtml">
+	<ui:define name="pageTitle">Formulario</ui:define>
+	<ui:define name="pageHeader">Formulario de Afiliación</ui:define>
+	<ui:define name="body">
+		<form jsfc="h:form" id="Form" style="text-align: -webkit-center;">
+			<p:panelGrid columns="3">
+				<br />
+				<h:outputLabel value="Tipo de documento:" for="tipoDocumento" />
+				<h:selectOneMenu id="tipoDocumento"
+					value="#{usuarioBean.usuario.tipoDocumento}">
+					<f:selectItems value="#{listarTipoDocumento.tiposDocumentos}" />
+				</h:selectOneMenu>
+				<br />
+				<br />
+				<h:outputLabel value="Número de documento:" />
+				<h:inputText id="numeroDocumento"
+					value="#{usuarioBean.usuario.numeroDocumento}"
+					validator="#{usuarioBean.validarNumeroDocumento}" required="true" />
+				<br />
+				<br />
+				<h:outputLabel value="Primer nombre:" />
+				<h:inputText id="primerNombre"
+					value="#{usuarioBean.usuario.primerNombre}" required="true"
+					validator="#{usuarioBean.validarNombre}">
+				</h:inputText>
+				<br />
+				<h:message for="primerNombre" style="color: red" />
+				<br />
+				<h:outputLabel value="Segundo nombre:" />
+				<h:inputText id="segundoNombre"
+					value="#{usuarioBean.usuario.segundoNombre}"
+					validator="#{usuarioBean.validarNombre}" />
+				<h:message for="segundoNombre" style="color: red" />
+				<br />
+				<br />
+				<h:outputLabel value="Primer apellido:" />
+				<h:inputText id="primerApellido"
+					value="#{usuarioBean.usuario.primerApellido}" required="true"
+					validator="#{usuarioBean.validarNombre}" />
+				<h:message for="primerApellido" style="color: red" />
+				<br />
+				<br />
+				<h:outputLabel value="Segundo apellido:" />
+				<h:inputText id="segundoApellido"
+					value="#{usuarioBean.usuario.segundoApellido}"
+					validator="#{usuarioBean.validarNombre}" />
+				<h:message for="segundoApellido" style="color: red" />
+				<br />
+				<br />
+				<p:outputLabel for="administradoraSalud">Administradora de Salud: </p:outputLabel>
+				<h:selectOneMenu id="administradoraSalud"
+					value="#{usuarioBean.usuario.administradoraSalud}">
+					<f:selectItems value="#{listaAdminSalud.administradorasSalud}"
+						var="administradoraSalud" itemValue="#{administradoraSalud.value}" />
+				</h:selectOneMenu>
+				<h:message for="administradoraSalud" />
+				<br />
+				<br />
+				<p:outputLabel for="fechaAfiliacionSalud">Fecha Afiliación Salud: </p:outputLabel>
+				<p:calendar id="fechaAfiliacionSalud"
+					value="#{usuarioBean.usuario.fechaAfiliacionSalud}" effect="fold"
+					pattern="yyyy/MM/dd" />
+				<h:message for="fechaAfiliacionSalud" style="color: red" />
+				<br />
+				<br />
+				<p:outputLabel for="administradoraPension">Administradora de Salud: </p:outputLabel>
+				<h:selectOneMenu id="administradoraPension"
+					value="#{usuarioBean.usuario.administradoraPension}">
+					<f:selectItems value="#{listaAdminPension.administradoraPension}"
+						var="administradoraPension"
+						itemValue="#{administradoraPension.value}" />
+				</h:selectOneMenu>
+				<h:message for="administradoraPension" />
+				<br />
+				<br />
+				<p:outputLabel for="fechaAfiliacionPension">Fecha Afiliación Pension: </p:outputLabel>
+				<h:inputText id="fechaAfiliacionPension"
+					value="#{usuarioBean.usuario.fechaAfiliacionPension}"
+					class="datepicker" converter="convertidorFecha" required="true" />
+
+				<h:message for="fechaAfiliacionPension" style="color: red" />
+				<br />
+				<br />
+				<h:commandButton class="commandButton" value="Registrar Usuario"
+					action="#{usuarioBean.registrarUsuario}" />
+				<br />
+
+				<div>
+					<p:messages></p:messages>
+				</div>
+
+			</p:panelGrid>
+		</form>
+	</ui:define>
+
+	<script>
+    $(function() {
+        $(".datepicker").datepicker({
+            dateFormat: "dd/mm/yy"
+        });
+    });
+	</script>
+</ui:composition>
+
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<head>
+<title><ui:insert name="pageTitle">Page Title</ui:insert></title>
+<style type="text/css">
+body {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 14px;
+}
+
+.header {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 18px;
+}
+
+.bottom {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 9px;
+	text-align: center;
+	vertical-align: middle;
+	color: #8E969D;
+}
+</style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet"
+	href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
+
+<body bgcolor="#ffffff">
+	<table style="border: 1px solid #CAD6E0" align="center" cellpadding="0"
+		cellspacing="0" border="0" width="400">
+		<tbody>
+
+			<tr>
+				<td class="header" height="42" align="center" valign="middle"
+					width="100%" bgcolor="#E4EBEB"><ui:insert name="pageHeader">Formulario Afiliacion</ui:insert>
+				</td>
+			</tr>
+			<tr>
+				<td height="1" width="100%" bgcolor="#CAD6E0"></td>
+			</tr>
+
+			<tr>
+				<td width="100%" colspan="2">
+					<table width="100%" style="height: 150px" align="left"
+						cellpadding="0" cellspacing="0" border="0">
+						<tbody>
+							<tr>
+								<td align="center" width="100%" valign="middle"><ui:insert
+										name="body">
+										<form jsfc="h:form" id="Form"
+											style="text-align: -webkit-center;">
+											<p:panelGrid columns="3">
+											<p:growl id="growl" showDetail="true" sticky="true"/>
+											<h:messages />
+												<br />
+												<h:outputLabel value="Tipo de documento:"
+													for="tipoDocumento" />
+												<h:selectOneMenu id="tipoDocumento"
+													value="#{usuarioBean.usuario.tipoDocumento}">
+													<f:selectItems
+														value="#{listarTipoDocumento.tiposDocumentos}" />
+												</h:selectOneMenu>
+												<br />
+												<br />
+												<h:outputLabel value="Número de documento:" />
+												<h:inputText id="numeroDocumento"
+													value="#{usuarioBean.usuario.numeroDocumento}"
+													validator="#{usuarioBean.validarNumeroDocumento}"
+													required="true" />
+												<h:message for="numeroDocumento" style="color: red"/>
+													
+												<br />
+												<br />
+												<h:outputLabel value="Primer nombre:" />
+												<h:inputText id="primerNombre"
+													value="#{usuarioBean.usuario.primerNombre}" required="true"
+													validator="#{usuarioBean.validarNombre}">
+												</h:inputText>
+												<br />
+												<h:message for="primerNombre" style="color: red" />
+												
+												<br />
+												<h:outputLabel value="Segundo nombre:" />
+												<h:inputText id="segundoNombre"
+													value="#{usuarioBean.usuario.segundoNombre}"
+													validator="#{usuarioBean.validarNombre}" />
+												<h:message for="segundoNombre" style="color: red" />
+												
+												<br />
+												<br />
+												<h:outputLabel value="Primer apellido:" />
+												<h:inputText id="primerApellido"
+													value="#{usuarioBean.usuario.primerApellido}"
+													required="true" validator="#{usuarioBean.validarNombre}" />
+												<h:message for="primerApellido" style="color: red" />
+												
+												<br />
+												<br />
+												<h:outputLabel value="Segundo apellido:" />
+												<h:inputText id="segundoApellido"
+													value="#{usuarioBean.usuario.segundoApellido}"
+													validator="#{usuarioBean.validarNombre}" />
+												<h:message for="segundoApellido" style="color: red" />
+												
+												<br />
+												<br />
+												<p:outputLabel for="administradoraSalud">Administradora de Salud: </p:outputLabel>
+												<h:selectOneMenu id="administradoraSalud"
+													value="#{usuarioBean.usuario.administradoraSalud}">
+													<f:selectItems
+														value="#{listaAdminSalud.administradorasSalud}"
+														var="administradoraSalud"
+														itemValue="#{administradoraSalud.value}" />
+												</h:selectOneMenu>
+												<h:message for="administradoraSalud" />
+												
+												<br />
+												<br />
+												<p:outputLabel for="fechaAfiliacionSalud">Fecha Afiliación Salud: </p:outputLabel>
+												<h:inputText id="fechaAfiliacionSalud"
+													value="#{usuarioBean.usuario.fechaAfiliacionSalud}"
+													class="datepicker" converter="convertidorFecha"
+													required="true" />
+												<h:message for="fechaAfiliacionSalud" style="color: red" />
+												
+												<br />
+												<br />
+												<p:outputLabel for="administradoraPension">Administradora de Salud: </p:outputLabel>
+												<h:selectOneMenu id="administradoraPension"
+													value="#{usuarioBean.usuario.administradoraPension}">
+													<f:selectItems
+														value="#{listaAdminPension.administradoraPension}"
+														var="administradoraPension"
+														itemValue="#{administradoraPension.value}" />
+												</h:selectOneMenu>
+												<h:message for="administradoraPension" />
+												
+												<br />
+												<br />
+												<p:outputLabel for="fechaAfiliacionPension">Fecha Afiliación Pension: </p:outputLabel>
+												<h:inputText id="fechaAfiliacionPension"
+													value="#{usuarioBean.usuario.fechaAfiliacionPension}"
+													class="datepicker" converter="convertidorFecha"
+													required="true" />
+												<h:message for="fechaAfiliacionPension" style="color: red" />
+												
+												<br />
+												<br />
+												<h:commandButton class="commandButton"
+													value="Registrar Usuario"
+													action="#{usuarioBean.registrarUsuario}" />
+												<br />
+
+												<div>
+													<p:messages></p:messages>
+												</div>
+
+											</p:panelGrid>
+										</form>
+									</ui:insert></td>
+							</tr>
+						</tbody>
+					</table>
+				</td>
+			</tr>
+
+			<tr>
+				<td colspan="2" valign="bottom" height="1" width="100%"
+					bgcolor="#CAD6E0"></td>
+			</tr>
+		</tbody>
+	</table>
+	<script>
+    $(function() {
+        $(".datepicker").datepicker({
+            dateFormat: "dd/mm/yy"
+        });
+    });
+	</script>
+</body>
+
+</html>
